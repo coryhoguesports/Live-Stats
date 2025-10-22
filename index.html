@@ -11,26 +11,10 @@
 </head>
 <body>
   <h1>🏈 CoryHogueSports Live Game Stats</h1>
-
-  <iframe id="statsFrame"
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTT1EyKxLLC_WhEyLgtZ-508IHMmrAQ7hYM9XGHdMR118Dn7t-xss9Fvr9FTLI0yTSGTmQAmHBGCytH/pubhtml?gid=571253696&single=true&v=boot"
-    referrerpolicy="no-referrer"
-    loading="eager"
-    ></iframe>
-
+  <iframe id="statsFrame" src="" referrerpolicy="no-referrer" loading="eager"></iframe>
   <script>
-    const BASE = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTT1EyKxLLC_WhEyLgtZ-508IHMmrAQ7hYM9XGHdMR118Dn7t-xss9Fvr9FTLI0yTSGTmQAmHBGCytH/pubhtml?gid=571253696&single=true";
-    const frame = document.getElementById("statsFrame");
-
-    function bust() {
-      // Use a 15s bucket so viewers don't spam Google’s cache but still get fresh data
-      const bucket = Math.floor(Date.now() / 15000); // 15s
-      frame.src = BASE + "&v=" + bucket;
-    }
-
-    // Initial bust, then repeat every 10s
-    bust();
-    setInterval(bust, 10000);
+    const BASE = "https://script.google.com/macros/s/AKfycbzPNItt2_bWmI5a5w6NtSy3swq6t2dS3Ivg2PPqhbIgAGVLkbmOVTTlSBVr1qEwrB4ROQ/exec";
+    document.getElementById("statsFrame").src = BASE + "?v=" + Date.now(); // cache-buster
   </script>
 </body>
 </html>
