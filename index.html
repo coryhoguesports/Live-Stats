@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="refresh" content="10">
+  <meta charset="utf-8" />
   <title>CoryHogueSports Live Stats</title>
   <style>
     body { margin: 0; background:#0a0a0a; }
     h1 { color:#fff; text-align:center; font:600 20px/1.2 system-ui, Arial; margin:10px 0; }
-    iframe { width:100vw; height:calc(100vh - 48px); border:0; }
+    iframe { width:100vw; height:calc(100vh - 48px); border:0; display:block; }
   </style>
 </head>
 <body>
   <h1>🏈 CoryHogueSports Live Game Stats</h1>
-  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTT1EyKxLLC_WhEyLgtZ-508IHMmrAQ7hYM9XGHdMR118Dn7t-xss9Fvr9FTLI0yTSGTmQAmHBGCytH/pubhtml?gid=571253696&single=true"></iframe>
+
+  <iframe id="statsFrame"
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTT1EyKxLLC_WhEyLgtZ-508IHMmrAQ7hYM9XGHdMR118Dn7t-xss9Fvr9FTLI0yTSGTmQAmHBGCytH/pubhtml?gid=571253696&single=true&v=boot"
+    referrerpolicy="no-referrer"
+    loading="eager"
+    ></iframe>
+
+  <script>
+    const BASE = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTT1EyKxLLC_WhEyLgtZ-508IHMmrAQ7hYM9XGHdMR118Dn7t-xss9Fvr9FTLI0yTSGTmQAmHBGCytH/pubhtml?gid=571253696&single=true";
+    const frame = document.getElementById("statsFrame");
+
+    function bust() {
+      // Use a 15s bucket so viewers don't spam Google’s cache but still get fresh data
+      const bucket = Math.floor(Date.now() / 15000); // 15s
+      frame.src = BASE + "&v=" + bucket;
+    }
+
+    // Initial bust, then repeat every 10s
+    bust();
+    setInterval(bust, 10000);
+  </script>
 </body>
 </html>
