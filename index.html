@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>CoryHogueSports Live Stats</title>
-  <style>
-    body { margin: 0; background:#0a0a0a; }
-    h1 { color:#fff; text-align:center; font:600 20px/1.2 system-ui, Arial; margin:10px 0; }
-    iframe { width:100vw; height:calc(100vh - 48px); border:0; display:block; }
-  </style>
-</head>
-<body>
-  <h1>🏈 CoryHogueSports Live Game Stats</h1>
-  <iframe id="statsFrame" src="" referrerpolicy="no-referrer" loading="eager"></iframe>
-  <script>
-    const BASE = "https://script.google.com/macros/s/AKfycbyuTKZ2ghs5T5SXrZxtWIPHqitZtqIeKRwVnXVvvfjrMGZoUb7h74bqYl3RyeaNcaiVHA/exec
-"; // from Apps Script deployment
-    document.getElementById("statsFrame").src = BASE + "?v=" + Date.now(); // cache-buster
-  </script>
-</body>
-</html>
+<!doctype html>
+<meta charset="utf-8">
+<title>CoryHogueSports Live Game Stats</title>
+<style>
+  body{margin:0;background:#000}
+  h1{color:#fff;text-align:center;font:600 20px/1.2 system-ui,Arial;margin:10px 0}
+  iframe{width:100vw;height:calc(100vh - 48px);border:0;display:block;background:#fff}
+</style>
+<h1>🏈 CoryHogueSports Live Game Stats</h1>
+<iframe id="stats" src="" referrerpolicy="no-referrer" loading="eager"></iframe>
+<script>
+  const WEBAPP = 'https://script.google.com/macros/s/AKfycbyw6tEWX8XxklMu1kpVxKHJcnEvyo50A59TPUnOgiIN4t-A0bltGLVynYZBM66_K3B74Q/exec';
+  document.getElementById('stats').src = WEBAPP + '?outer=' + Date.now(); // extra cache-buster at GitHub layer
+</script>
