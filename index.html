@@ -13,20 +13,40 @@
 <body>
   <h1>🏈 CoryHogueSports Live Game Stats</h1>
 
-  <!-- Use your real Apps Script Web App URL (already ends with /exec) -->
-  <iframe
-    id="stats"
-    src="https://script.google.com/macros/s/AKfycbyTy3Q_5hV_m6_hJJJQOo3Cgly0szobU8M9wFMrc2wD8LzrGfeh38SxykDvIF7d1MopNQ/exec?v=boot"
-    referrerpolicy="no-referrer"
-    loading="eager">
-  </iframe>
+  <!-- two iframes: one visible, one hidden -->
+  <iframe id="frameA" style="width:100vw;height:calc(100vh - 48px);border:0;display:block;background:#fff"></iframe>
+  <iframe id="frameB" style="width:100vw;height:calc(100vh - 48px);border:0;display:none;background:#fff"></iframe>
 
   <script>
-    // Refresh the iframe periodically with a proper cache-buster
     const BASE = "https://script.google.com/macros/s/AKfycbyTy3Q_5hV_m6_hJJJQOo3Cgly0szobU8M9wFMrc2wD8LzrGfeh38SxykDvIF7d1MopNQ/exec";
-    setInterval(() => {
-      document.getElementById('stats').src = BASE + "?v=" + Date.now();
-    }, 15000); // refresh every 15s (adjust as you like)
+
+    let showing = "A"; // which iframe is currently visible
+
+    function setSrc(el, v) {
+      el.src = BASE + "?v=" + v; // cache-buster
+    }
+
+    function refresh() {
+      const next = (showing === "A") ? document.getElementById("frameB")
+                                     : document.getElementById("frameA");
+      const current = (showing === "A") ? document.getElementById("frameA")
+                                        : document.getElementById("frameB");
+
+      // preload hidden frame
+      const token = Date.now();
+      next.onload = () => {
+        // swap without flicker once loaded
+        current.style.display = "none";
+        next.style.display = "block";
+        showing = (showing === "A") ? "B" : "A";
+      };
+      setSrc(next, token);
+    }
+
+    // initial load into A
+    setSrc(document.getElementById("frameA"), Date.now());
+
+    // refresh every 30s (adjust as needed)
+    setInterval(refresh, 30000);
   </script>
 </body>
-</html>
