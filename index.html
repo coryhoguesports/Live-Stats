@@ -12,17 +12,21 @@
 </head>
 <body>
   <h1>🏈 CoryHogueSports Live Game Stats</h1>
+
+  <!-- Use your real Apps Script Web App URL (already ends with /exec) -->
   <iframe
     id="stats"
-    src="PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL/exec?v=boot"
+    src="https://script.google.com/macros/s/AKfycbyTy3Q_5hV_m6_hJJJQOo3Cgly0szobU8M9wFMrc2wD8LzrGfeh38SxykDvIF7d1MopNQ/exec?v=boot"
     referrerpolicy="no-referrer"
     loading="eager">
   </iframe>
+
   <script>
-    // extra outer cache-buster (optional)
-    setInterval(()=>{
-      document.getElementById('stats').src = "https://script.google.com/macros/s/AKfycbyTy3Q_5hV_m6_hJJJQOo3Cgly0szobU8M9wFMrc2wD8LzrGfeh38SxykDvIF7d1MopNQ/exec" + Date.now();
-    }, 120000); // 2 minutes; inner iframe already refreshes every 10s
+    // Refresh the iframe periodically with a proper cache-buster
+    const BASE = "https://script.google.com/macros/s/AKfycbyTy3Q_5hV_m6_hJJJQOo3Cgly0szobU8M9wFMrc2wD8LzrGfeh38SxykDvIF7d1MopNQ/exec";
+    setInterval(() => {
+      document.getElementById('stats').src = BASE + "?v=" + Date.now();
+    }, 15000); // refresh every 15s (adjust as you like)
   </script>
 </body>
 </html>
