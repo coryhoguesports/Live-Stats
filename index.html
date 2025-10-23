@@ -4,49 +4,11 @@
   <meta charset="utf-8" />
   <title>CoryHogueSports Live Game Stats</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body { margin:0; background:#000; }
-    h1 { color:#fff; text-align:center; font:600 22px/1.2 system-ui, Arial; margin:12px 0; }
-    iframe { width:100vw; height:calc(100vh - 48px); border:0; display:block; background:#fff; }
-  </style>
+  <!-- Immediately send fans to the live-updating Google Sheet -->
+  <meta http-equiv="refresh" content="0; url=PASTE_YOUR_VIEWER_LINK">
 </head>
 <body>
-  <h1>🏈 CoryHogueSports Live Game Stats</h1>
-
-  <!-- two iframes: one visible, one hidden -->
-  <iframe id="frameA" style="width:100vw;height:calc(100vh - 48px);border:0;display:block;background:#fff"></iframe>
-  <iframe id="frameB" style="width:100vw;height:calc(100vh - 48px);border:0;display:none;background:#fff"></iframe>
-
-  <script>
-    const BASE = "https://script.google.com/macros/s/AKfycbyTy3Q_5hV_m6_hJJJQOo3Cgly0szobU8M9wFMrc2wD8LzrGfeh38SxykDvIF7d1MopNQ/exec";
-
-    let showing = "A"; // which iframe is currently visible
-
-    function setSrc(el, v) {
-      el.src = BASE + "?v=" + v; // cache-buster
-    }
-
-    function refresh() {
-      const next = (showing === "A") ? document.getElementById("frameB")
-                                     : document.getElementById("frameA");
-      const current = (showing === "A") ? document.getElementById("frameA")
-                                        : document.getElementById("frameB");
-
-      // preload hidden frame
-      const token = Date.now();
-      next.onload = () => {
-        // swap without flicker once loaded
-        current.style.display = "none";
-        next.style.display = "block";
-        showing = (showing === "A") ? "B" : "A";
-      };
-      setSrc(next, token);
-    }
-
-    // initial load into A
-    setSrc(document.getElementById("frameA"), Date.now());
-
-    // refresh every 30s (adjust as needed)
-    setInterval(refresh, 30000);
-  </script>
+  <!-- Fallback link if meta refresh is blocked -->
+  <p><a href="https://docs.google.com/spreadsheets/d/1H6mI8E6MTcmlk8zN4dSCdFMF5WcZPI9P2n6FSD0ZRTA/edit?usp=sharing">Click here for Live Game Stats</a></p>
 </body>
+</html>
